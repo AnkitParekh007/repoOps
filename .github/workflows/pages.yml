@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -25,6 +26,23 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: website
+      - name: Wait for Pages artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in {1..20}; do
+            if count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages" --jq '[.artifacts[] | select(.name == "github-pages" and .expired == false)] | length'); then
+              if [ "$count" = 1 ]; then
+                echo "Pages artifact is visible to the REST API."
+                exit 0
+              fi
+            fi
+            sleep 3
+          done
+          echo "::error::Pages artifact metadata did not become available"
+          exit 1
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
