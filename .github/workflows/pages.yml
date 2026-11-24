@@ -13,11 +13,12 @@ concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      pages: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,6 +36,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: website-react/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Wait for Pages artifact metadata
         env:
           GH_TOKEN: ${{ github.token }}
@@ -45,7 +53,8 @@ jobs:
             if count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages" --jq '[.artifacts[] | select(.name == "github-pages" and .expired == false)] | length'); then
               if [ "$count" = 1 ]; then
                 echo "Pages artifact is visible to the REST API."
-                exit 0
+                sleep 10
+              exit 0
               fi
             fi
             sleep 3
