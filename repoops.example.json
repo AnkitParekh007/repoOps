@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "repositories": [
+    {
+      "name": "AnkitParekh007/repoOps",
+      "mode": "observe",
+      "upstreams": [
+        "nodejs/node"
+      ],
+      "maxIssues": 3,
+      "requiredChecks": [
+        "test"
+      ]
+    }
+  ]
+}
