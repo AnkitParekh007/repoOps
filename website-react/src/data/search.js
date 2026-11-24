@@ -6,42 +6,42 @@ export const searchIndex=[
   ],
   [
     "Features",
-    "/features.html",
+    "/features/",
     "AI issue triage merge release feedback portfolio documentation"
   ],
   [
     "Installation",
-    "/docs.html#install",
+    "/docs/#install",
     "install node npm git clone test"
   ],
   [
     "Audit",
-    "/docs.html#audit",
+    "/docs/#audit",
     "audit report commit sha token"
   ],
   [
     "Scheduling",
-    "/docs.html#schedule",
+    "/docs/#schedule",
     "15 days checkpoint artifact workflow"
   ],
   [
     "Portfolio",
-    "/docs.html#portfolio",
+    "/docs/#portfolio",
     "configuration observe apply issue publication"
   ],
   [
     "Safety",
-    "/docs.html#security",
+    "/docs/#security",
     "security credentials policy merge sandbox"
   ],
   [
     "About",
-    "/about.html",
+    "/about/",
     "purpose provider evidence"
   ],
   [
     "Contact",
-    "/contact.html",
+    "/contact/",
     "github issues contribution maintainer"
   ]
 ];
