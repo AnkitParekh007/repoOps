@@ -32,3 +32,5 @@ header{position:sticky;top:0;z-index:20;background:var(--bg);background:color-mi
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:24px;padding:24px 0 32px}.hero h1{font-size:clamp(2rem,5.8vw,3rem)}.hero-visual{max-width:620px}}
 @media(max-width:520px){.hero{padding:20px 0 28px;gap:20px}.hero h1{font-size:clamp(1.65rem,7vw,2.25rem);letter-spacing:-.025em}.hero-copy{gap:10px}.hero .actions{margin:2px 0 0}.hero .primary,.hero .secondary{font-size:.9rem}.hero-visual{padding:2.8rem .75rem 1.6rem}}
 @media(prefers-reduced-motion:reduce){.hero .typing #typewriter:after{display:none}}
+
+.brand-mark{vertical-align:middle;object-fit:contain;margin-right:.32rem;flex-shrink:0}.brand{display:inline-flex;align-items:center;gap:.1em}
