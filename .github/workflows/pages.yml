@@ -2,7 +2,7 @@ name: Deploy project website
 on:
   push:
     branches: [main]
-    paths: ['website/**', '.github/workflows/pages.yml']
+    paths: ['website-react/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,10 +22,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build and verify React site
+        working-directory: website-react
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+          npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: website
+          path: website-react/dist
       - name: Wait for Pages artifact metadata
         env:
           GH_TOKEN: ${{ github.token }}

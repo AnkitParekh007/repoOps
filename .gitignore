@@ -2,3 +2,8 @@ node_modules/
 .env
 .env.*
 reports/
+
+website-react/dist/
+website-react/.ssr/
+website-react/test-results/
+website-react/playwright-report/
