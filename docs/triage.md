@@ -1,0 +1,2 @@
+# Issue triage
+Run node src/triage-cli.mjs reports/report.json existing-issues.json to produce bounded dry-run proposals. Supply a complete export of open and closed issues, including bodies. Fingerprints suppress repeat proposals. A missing or incomplete issue export must not be used for live publishing. No issue API writes are implemented yet; live publication requires an allowlisted repository, verified pagination, fresh evidence and separate write credentials.
