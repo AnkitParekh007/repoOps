@@ -1,0 +1,2 @@
+# Website UX audit
+Source-level review: sticky navigation, three theme choices with live system preference, accessible SVG icons, bounded one-shot typewriter with static screen-reader text, responsive card grids, reduced-motion overrides, search and sponsorship links. Warm cream/green/yellow design direction inferred from indexed reference description; original animation could not be inspected. Browser viewport, keyboard interaction and automated accessibility scans remain to be verified. No new runtime dependencies.

@@ -1,1 +1,1 @@
-(()=>{let saved;try{saved=localStorage.getItem('repoops-theme')}catch{}document.documentElement.dataset.theme=['light','dark'].includes(saved)?saved:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';})();
+(()=>{let saved;try{saved=localStorage.getItem('repoops-theme')}catch{}const choice=['system','light','dark'].includes(saved)?saved:'system';document.documentElement.dataset.themeChoice=choice;document.documentElement.dataset.theme=choice==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):choice;})();
