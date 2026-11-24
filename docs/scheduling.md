@@ -1,0 +1,2 @@
+# Scheduled audits
+The daily workflow checks a 15-day elapsed interval using the last successful audit checkpoint. It restores the latest successful workflow artifact, retains reports for 30 days and fails if an expected checkpoint cannot be downloaded. A missing initial checkpoint triggers an audit. A failed audit does not advance the checkpoint. Workflow concurrency serializes runs. This is a single-repository GitHub Actions pilot, not a durable multi-tenant service. Artifact expiry or deletion requires operator recovery. No external writes are performed.

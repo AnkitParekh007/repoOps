@@ -1,0 +1,42 @@
+name: Scheduled audit
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: repoops-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Restore checkpoint from latest successful artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p reports
+          run_id=$(gh run list --workflow audit.yml --status success --branch "${{ github.event.repository.default_branch }}" --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+          if [ -n "$run_id" ]; then
+            gh run download "$run_id" --name audit-checkpoint --dir reports
+          fi
+      - name: Audit if due
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: node src/schedule-cli.mjs "$REPO" reports/state.json reports/report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-checkpoint
+          path: reports/
+          if-no-files-found: error
+          retention-days: 30
