@@ -19,7 +19,7 @@ jobs:
       - run: npm test
       - run: node --check src/cli.mjs
   website:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
       run:
