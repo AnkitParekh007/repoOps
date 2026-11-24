@@ -1,0 +1,1 @@
+(()=>{let saved;try{saved=localStorage.getItem('repoops-theme')}catch{}document.documentElement.dataset.theme=['light','dark'].includes(saved)?saved:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';})();
